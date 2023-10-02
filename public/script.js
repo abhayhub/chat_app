@@ -3,15 +3,31 @@ var socket = io();
 
 let btn = document.getElementById('btn');
 
-//sending event from client side
-btn.onclick = function exec () {
-    socket.emit("from client")
+let inputmsg = document.getElementById('newmsg');
+let msglist = document.getElementById('msglist');
+
+btn.onclick = function exec(){
+    socket.emit('msg_send',{
+        msg : inputmsg.value
+    });
 }
 
-//here we are listening a event
-//you can listen event using socket.on( , () => {});
 
-socket.on('from server', () => {
-    console.log("collected a new event from server");
+socket.on('msg_received', (data) => {
+    let lismsg = document.createElement('li');
+    lismsg.innerText = data.msg;
+    msglist.appendChild(lismsg);
 })
+
+// //sending event from client side
+// btn.onclick = function exec () {
+//     socket.emit("from client")
+// }
+
+// //here we are listening a event
+// //you can listen event using socket.on( , () => {});
+
+// socket.on('from server', () => {
+//     console.log("collected a new event from server");
+// })
 

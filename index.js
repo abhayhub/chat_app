@@ -15,16 +15,22 @@ io.on('connection',(socket) => {
     console.log('a user connected ' + socket.id);
     
     //listening event from client side
-    socket.on('from client',() => {
-        console.log("collected a new event from client");
+    // socket.on('from client',() => {
+    //     console.log("collected a new event from client");
         
+    // })
+
+    socket.on('msg_send',(data) => {
+        console.log(data);
+        //emit a event msg recieved
+        io.emit('msg_received',data);
     })
 
     //sending event from the server
     setInterval(() => {
         socket.emit("from server");
     } ,1000)
-})
+});
 
 //middleware that serve a static file
 app.use('/',express.static(__dirname + '/public'))
