@@ -1,0 +1,58 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(15,22,49);
+}
+
+h1{
+    color: #fff;
+}
+
+.chatbox{
+    position: absolute;
+    top: 10%;
+    left: 40%;
+    transform: translate(0,-50%);
+}
+
+#newmsg{
+    color: #fff;
+    background-color: black;
+    height: 30px;
+    margin: 5%;
+    border: none;
+    outline: none;
+    padding: 5px;
+    position: sticky;
+    top: 2%;
+}
+
+#btn{
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: blue;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    
+}
+
+#msglist{
+    width: 100%;
+    height: auto;
+    border: 2px solid green;
+}
+
+#msglist > li{
+    background-color: #2B3943;
+    margin: 2%;
+    padding: 5px;
+    color: grey;
+    font-size: 1.5rem;
+}

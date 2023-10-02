@@ -4,18 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="./index.css">--> 
     <title>chat app</title>
 </head>
 <body>
-
+     
+    <div class="chatbox">
     <h1>Chat app using socket</h1>
-
-    <input type="text" id="newmsg">
+     
+    <input type="text" id="roomId" placeholder="roomid">
+    <input type="text" id="username" placeholder="user id">
+    <input type="text" id="newmsg" placeholder="Enter you msg">
     <button id="btn">Send</button>
 
     <ul id="msglist">
 
     </ul>
+</div>
     <!-- here we are getting /socket.io/socket.io.js from socket.io library -->>
     <script src="/socket.io/socket.io.js"></script>
     <script src="./script.js"></script>
