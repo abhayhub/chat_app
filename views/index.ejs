@@ -10,12 +10,15 @@
 
     <ul id="msglist">
         <% for(let i=0;i<chats.length; i++){ %>
-            <li><%= chats[i].content %></li>
+            <li><%= chats[i].user %> : <%= chats[i].content %></li>
         <% } %>
+
+        <span id="typing" style="display: none;">typing...</span>
+        
     </ul>
 
     <!-- <button id="startchat">Start Chat</button> -->
-    <input type="text" data-roomid="<%= id %>" id="username" placeholder="user id">
+    <input type="text" data-roomid="<%= id %>" id="username"  placeholder="user id" required>
     <input type="text" id="newmsg" placeholder="message..">
     <button id="btn" onkeypress="myfunc(event)">Send</button>
     <!--you can write all your js code inside <%= name %> -->
@@ -31,6 +34,10 @@
     let msglist = document.getElementById('msglist');
 
     btn.onclick = function exec(){
+        if(username.value === ""){
+            alert("please enter your username...")
+            return;
+        }
         socket.emit('msg_send',{
             msg : inputmsg.value,
             roomid : username.getAttribute('data-roomid'),
@@ -38,7 +45,20 @@
         });
     }
 
+    
+    let typestatus = document.getElementById('typing');
+    inputmsg.addEventListener('keypress', function (e) {
+            typestatus.style.display = 'block';
+    });
+    inputmsg.addEventListener('keyup', function (e) {
+        setInterval( function () {
+            typestatus.style.display = 'none';
+        },1500);
+        
+    });
+
     // startchat.onclick = function exec() {
+    //   <span id="typing" style="display: none;">typing...</span>
     //     socket.emit('join_room',{
     //         roomid : startchat.getAttribute('data-roomid')
     //     });
@@ -55,8 +75,11 @@
 
     socket.on('msg_received', (data) => {
         let lismsg = document.createElement('li');
-        lismsg.innerText = data.username+": "+ data.msg;
+        lismsg.innerHTML =  data.username  +": "+ data.msg + '<span>  &#10003;</span>';
         msglist.appendChild(lismsg);
+        setInterval( function () {
+            window.location.reload();
+        },2000);
     })
     </script>
 </body>
